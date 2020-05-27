@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DCDCDC"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
@@ -19,8 +18,10 @@
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:text="@string/total_r_0_00"
+       android:textColor="@android:color/holo_red_dark"
        android:textSize="24sp"
        android:textStyle="bold"
+       android:id="@+id/txt_total"
        android:padding="10dp" />
 
     <ListView

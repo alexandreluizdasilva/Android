@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import java.text.NumberFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +25,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         //implementação do adaptador
-        val produtosAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
+        val produtosAdapter = ProdutoAdapter(this)
+
+        produtosAdapter.addAll(produtosGlobal)
 
         //definindo o adaptador na lista
         list_view_produtos.adapter = produtosAdapter
@@ -41,5 +45,18 @@ class MainActivity : AppCompatActivity() {
                 //retorno indicando que o click foi realizado com sucesso
                 true
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val adapter = list_view_produtos.adapter as ProdutoAdapter
+
+        adapter.clear()
+        adapter.addAll(produtosGlobal)
+
+        val soma = produtosGlobal.sumByDouble { it.valor * it.quantidade }
+
+        val f = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
+        txt_total.text = "TOTAL: ${f.format(soma)}"
     }
 }
